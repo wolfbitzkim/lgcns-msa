@@ -26,28 +26,21 @@ import java.util.UUID;
 @Slf4j
 public class UserServiceImpl implements UserService {
     UserRepository userRepository;
-    BCryptPasswordEncoder passwordEncoder;
+//    BCryptPasswordEncoder passwordEncoder;
 
     Environment env;
-    RestTemplate restTemplate;
+//    RestTemplate restTemplate;
 
-    OrderServiceClient orderServiceClient;
+//    OrderServiceClient orderServiceClient;
 
-    CircuitBreakerFactory circuitBreakerFactory;
+//    CircuitBreakerFactory circuitBreakerFactory;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
-                           BCryptPasswordEncoder passwordEncoder,
                            Environment env,
-                           RestTemplate restTemplate,
-                           OrderServiceClient orderServiceClient,
                            CircuitBreakerFactory circuitBreakerFactory) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
         this.env = env;
-        this.restTemplate = restTemplate;
-        this.orderServiceClient = orderServiceClient;
-        this.circuitBreakerFactory = circuitBreakerFactory;
     }
 
     @Override
@@ -57,7 +50,7 @@ public class UserServiceImpl implements UserService {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         UserEntity userEntity = mapper.map(userDto, UserEntity.class);
-        userEntity.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
+//        userEntity.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
 
         userRepository.save(userEntity);
 
@@ -76,12 +69,12 @@ public class UserServiceImpl implements UserService {
         /* #1 Using as rest template */
         /* http://ORDER-SERVICE/order-service/1234-45565-34343423432/orders */
         /* http://127.0.0.1:9002/order-service/1234-45565-34343423432/orders */
-        String orderUrl = String.format(env.getProperty("order_service.url"), userId);
-        ResponseEntity<List<ResponseOrder>> orderListResponse =
-                restTemplate.exchange(orderUrl, HttpMethod.GET, null,
-                                            new ParameterizedTypeReference<List<ResponseOrder>>() {
-                });
-        ordersList = orderListResponse.getBody();
+//        String orderUrl = String.format(env.getProperty("order_service.url"), userId);
+//        ResponseEntity<List<ResponseOrder>> orderListResponse =
+//                restTemplate.exchange(orderUrl, HttpMethod.GET, null,
+//                                            new ParameterizedTypeReference<List<ResponseOrder>>() {
+//                });
+//        ordersList = orderListResponse.getBody();
 
         /* Using a feign client */
         /* #2 Feign exception handling */
