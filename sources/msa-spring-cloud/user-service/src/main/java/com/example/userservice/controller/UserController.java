@@ -20,6 +20,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/")
+// localhost:50001/welcome
+// localhost:8000/user-service/login -> localhost:50001/login
 public class UserController {
     private Environment env;
     private UserService userService;
