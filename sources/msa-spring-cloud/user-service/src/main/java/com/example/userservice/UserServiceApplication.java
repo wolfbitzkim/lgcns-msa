@@ -1,5 +1,6 @@
 package com.example.userservice;
 
+import com.example.userservice.error.FeignErrorDecoder;
 import feign.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-//@EnableFeignClients
+@EnableFeignClients
 public class UserServiceApplication {
 
     public static void main(String[] args) {
@@ -24,16 +25,16 @@ public class UserServiceApplication {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    @LoadBalanced
-//    public RestTemplate getRestTemplate() {
-//        return new RestTemplate();
-//    }
-//
-//    @Bean
-//    public Logger.Level feignLoggerLevel() {
-//        return Logger.Level.FULL;
-//    }
+    @Bean
+    @LoadBalanced
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
+
+    @Bean
+    public Logger.Level feignLoggerLevel() {
+        return Logger.Level.FULL;
+    }
 
 //    @Bean
 //    public FeignErrorDecoder getFeignErrorDecoder() {
