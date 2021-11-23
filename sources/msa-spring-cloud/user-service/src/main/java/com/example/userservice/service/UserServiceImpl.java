@@ -26,7 +26,7 @@ import java.util.UUID;
 @Slf4j
 public class UserServiceImpl implements UserService {
     UserRepository userRepository;
-//    BCryptPasswordEncoder passwordEncoder;
+    BCryptPasswordEncoder passwordEncoder;
 
     Environment env;
 //    RestTemplate restTemplate;
@@ -38,8 +38,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            Environment env,
-                           CircuitBreakerFactory circuitBreakerFactory) {
+                           BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
         this.env = env;
     }
 
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         UserEntity userEntity = mapper.map(userDto, UserEntity.class);
-//        userEntity.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
+        userEntity.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
 
         userRepository.save(userEntity);
 
