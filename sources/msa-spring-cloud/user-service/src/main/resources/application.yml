@@ -52,9 +52,5 @@ management:
 greeting:
   message: Welcome to the Simple E-commerce.
 
-#gateway:
-#  ip: 10.204.136.204
-#
-#token:
-#  expiration_time: 86400000
-#  secret: user_token
+order_service:
+  url: http://order-service/order-service/%s/orders
