@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8000
 
 eureka:
   client:
@@ -57,7 +57,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-#            - AuthorizationHeaderFilter
+            - AuthorizationHeaderFilter
         - id: catalog-service
           uri: lb://CATALOG-SERVICE
           predicates:
@@ -87,6 +87,10 @@ spring:
 #            - AddRequestHeader=second-request, second-request-header2
 #            - AddResponseHeader=second-response, second-response-header2
             - CustomFilter
+
+#token:
+#  expiration_time: 86400000
+#  secret: user_token
 
 management:
   endpoints:
