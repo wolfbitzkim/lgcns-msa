@@ -13,7 +13,7 @@ spring:
 #        probability: 1.0
 #  rabbitmq:
 #    host: 127.0.0.1
-#    port: 5672
+#    port: 35672
 #    username: guest
 #    password: guest
   h2:

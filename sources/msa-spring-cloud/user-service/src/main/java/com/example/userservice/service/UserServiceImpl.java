@@ -91,17 +91,17 @@ public class UserServiceImpl implements UserService {
         /* #1 Using as rest template */
         /* http://ORDER-SERVICE/order-service/1234-45565-34343423432/orders */
         /* http://127.0.0.1:9002/order-service/1234-45565-34343423432/orders */
-        String orderUrl = String.format(env.getProperty("order_service.url"), userId);
-        ResponseEntity<List<ResponseOrder>> orderListResponse =
-                restTemplate.exchange(orderUrl, HttpMethod.GET, null,
-                                            new ParameterizedTypeReference<List<ResponseOrder>>() {
-                });
-        ordersList = orderListResponse.getBody();
+//        String orderUrl = String.format(env.getProperty("order_service.url"), userId);
+//        ResponseEntity<List<ResponseOrder>> orderListResponse =
+//                restTemplate.exchange(orderUrl, HttpMethod.GET, null,
+//                                            new ParameterizedTypeReference<List<ResponseOrder>>() {
+//                });
+//        ordersList = orderListResponse.getBody();
 
         /* Using a feign client */
         /* #2 Feign exception handling */
 //        try {
-//            ordersList = orderServiceClient.getOrders(userId);
+            ordersList = orderServiceClient.getOrders(userId);
 //        } catch (FeignException ex) {
 //            log.error(ex.getMessage());
 //        }
