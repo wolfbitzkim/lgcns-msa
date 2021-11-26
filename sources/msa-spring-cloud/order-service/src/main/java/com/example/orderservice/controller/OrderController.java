@@ -3,6 +3,7 @@ package com.example.orderservice.controller;
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.jpa.OrderEntity;
 import com.example.orderservice.messagequeue.KafkaProducer;
+import com.example.orderservice.messagequeue.OrderProducer;
 import com.example.orderservice.service.OrderService;
 import com.example.orderservice.vo.RequestOrder;
 import com.example.orderservice.vo.ResponseOrder;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/order-service")
@@ -25,13 +27,16 @@ public class OrderController {
     Environment env;
     OrderService orderService;
     KafkaProducer kafkaProducer;
+    OrderProducer orderProducer;
 
     @Autowired
     public OrderController(Environment env, OrderService orderService,
-                           KafkaProducer kafkaProducer) {
+                           KafkaProducer kafkaProducer,
+                           OrderProducer orderProducer) {
         this.env = env;
         this.orderService = orderService;
         this.kafkaProducer = kafkaProducer;
+        this.orderProducer = orderProducer;
     }
 
     @GetMapping("/health_check")
@@ -54,11 +59,12 @@ public class OrderController {
         ResponseOrder responseOrder = mapper.map(createdOrder, ResponseOrder.class);
 
         /* kafka */
-//        orderDto.setOrderId(UUID.randomUUID().toString());
-//        orderDto.setTotalPrice(orderDetails.getQty() * orderDetails.getUnitPrice());
+        orderDto.setOrderId(UUID.randomUUID().toString());
+        orderDto.setTotalPrice(orderDetails.getQty() * orderDetails.getUnitPrice());
 
         /* send this order to the kafka */
-//        kafkaProducer.send("example-catalog-topic", orderDto);
+        kafkaProducer.send("example-catalog-topic", orderDto);
+//        orderProducer.send("orders", orderDto);
 
 //        ResponseOrder responseOrder = mapper.map(orderDto, ResponseOrder.class);
 
