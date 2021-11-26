@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
@@ -101,18 +102,20 @@ public class UserServiceImpl implements UserService {
         /* Using a feign client */
         /* #2 Feign exception handling */
 //        try {
-            ordersList = orderServiceClient.getOrders(userId);
+//            ordersList = orderServiceClient.getOrders(userId);
 //        } catch (FeignException ex) {
 //            log.error(ex.getMessage());
 //        }
 
         /* #3 ErrorDecoder */
 //        ordersList = orderServiceClient.getOrders(userId);
-//        log.info("Before call orders microservice");
-//        CircuitBreaker circuitBreaker = circuitBreakerFactory.create("circuitbreaker");
-//        ordersList = circuitBreaker.run(() -> orderServiceClient.getOrders(userId),
-//                throwable -> new ArrayList<>());
-//        log.info("After called orders microservice");
+
+        /* #4 CircuitBreaker */
+        log.info("Before call orders microservice");
+        CircuitBreaker circuitBreaker = circuitBreakerFactory.create("circuitbreaker");
+        ordersList = circuitBreaker.run(() -> orderServiceClient.getOrders(userId),
+                throwable -> new ArrayList<>());
+        log.info("After called orders microservice");
 
         userDto.setOrders(ordersList);
 

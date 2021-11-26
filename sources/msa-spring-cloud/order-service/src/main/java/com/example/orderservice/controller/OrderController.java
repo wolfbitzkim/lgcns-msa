@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @RestController
@@ -81,6 +82,18 @@ public class OrderController {
         orderList.forEach(v -> {
             result.add(new ModelMapper().map(v, ResponseOrder.class));
         });
+
+        try {
+            Random rnd = new Random();
+            int n = rnd.nextInt(3);
+            if (n % 2 == 0) {
+                Thread.sleep(3000);
+
+                throw new Exception("장애 발생");
+            }
+        } catch (InterruptedException ex) {
+            log.error(ex.getMessage());
+        }
 
         log.info("Add retrieved orders data");
 
