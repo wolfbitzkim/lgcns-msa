@@ -42,10 +42,10 @@ spring:
 #          predicates:
 #            - Path=/order-service/actuator/**
 #            - Method=GET,POST
-#        - id: order-service
-#          uri: lb://ORDER-SERVICE
-#          predicates:
-#            - Path=/order-service/**
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order-service/**
         - id: first-service
           uri: lb://MY-FIRST-SERVICE
           predicates:

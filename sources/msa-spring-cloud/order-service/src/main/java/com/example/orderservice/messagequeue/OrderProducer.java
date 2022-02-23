@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 
-@Service
+//@Service
 @Slf4j
 public class OrderProducer {
     private KafkaTemplate<String, String> kafkaTemplate;
@@ -29,7 +29,7 @@ public class OrderProducer {
             .name("orders")
             .build();
 
-    @Autowired
+//    @Autowired
     public OrderProducer(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
