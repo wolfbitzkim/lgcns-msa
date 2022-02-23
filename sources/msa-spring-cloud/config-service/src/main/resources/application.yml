@@ -15,8 +15,8 @@ spring:
     config:
       server:
         git:
-#          uri: file:///C:\Users\icore\Desktop\dowon\lge-msa\git-local-repo
-          uri: https://github.com/joneconsulting/spring-cloud-config
+          uri: file:///C:\Users\user\Desktop\dowon\lge-msa\git-local-repo
+#          uri: https://github.com/joneconsulting/spring-cloud-config
         native:
           search-locations: file:///C:\Users\icore\Desktop\dowon\lge-msa\git-local-repo
 
