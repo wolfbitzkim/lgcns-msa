@@ -102,14 +102,14 @@ public class UserServiceImpl implements UserService {
 
         /* Using a feign client */
         /* #2 Feign exception handling */
-        try {
-            ordersList = orderServiceClient.getOrders(userId);
-        } catch (FeignException ex) {
-            log.error(ex.getMessage());
-        }
+//        try {
+//            ordersList = orderServiceClient.getOrders(userId);
+//        } catch (FeignException ex) {
+//            log.error(ex.getMessage());
+//        }
 
         /* #3 ErrorDecoder */
-//        ordersList = orderServiceClient.getOrders(userId);
+        ordersList = orderServiceClient.getOrders(userId);
 
         /* #4 CircuitBreaker */
 //        log.info("Before call orders microservice");
