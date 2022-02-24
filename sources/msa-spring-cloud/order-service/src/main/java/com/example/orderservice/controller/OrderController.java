@@ -71,6 +71,8 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseOrder);
     }
 
+    // http://127.0.0.1:8000/orde-service/order-service/{userId}/orders
+    // http://ORDER-SERVICE/order-service/{userId}/orders
     @GetMapping("/{userId}/orders")
     public ResponseEntity<List<ResponseOrder>> getOrder(@PathVariable("userId") String userId) throws Exception {
         log.info("Before retrieve orders data");

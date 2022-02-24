@@ -5,6 +5,7 @@ import com.example.userservice.dto.UserDto;
 import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.jpa.UserRepository;
 import com.example.userservice.vo.ResponseOrder;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -89,9 +90,9 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
 
         List<ResponseOrder> ordersList = new ArrayList<>();
-        /* #1 Using as rest template */
-        /* http://ORDER-SERVICE/order-service/1234-45565-34343423432/orders */
-        /* http://127.0.0.1:9002/order-service/1234-45565-34343423432/orders */
+//        /* #1 Using as rest template */
+//        /* http://ORDER-SERVICE/order-service/1234-45565-34343423432/orders */
+//        /* http://127.0.0.1:9002/order-service/1234-45565-34343423432/orders */
 //        String orderUrl = String.format(env.getProperty("order_service.url"), userId);
 //        ResponseEntity<List<ResponseOrder>> orderListResponse =
 //                restTemplate.exchange(orderUrl, HttpMethod.GET, null,
@@ -101,11 +102,11 @@ public class UserServiceImpl implements UserService {
 
         /* Using a feign client */
         /* #2 Feign exception handling */
-//        try {
-//            ordersList = orderServiceClient.getOrders(userId);
-//        } catch (FeignException ex) {
-//            log.error(ex.getMessage());
-//        }
+        try {
+            ordersList = orderServiceClient.getOrders(userId);
+        } catch (FeignException ex) {
+            log.error(ex.getMessage());
+        }
 
         /* #3 ErrorDecoder */
 //        ordersList = orderServiceClient.getOrders(userId);
