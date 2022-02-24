@@ -11,11 +11,11 @@ eureka:
 spring:
   application:
     name: apigateway-service
-#  rabbitmq:
-#    host: 127.0.0.1
-#    port: 35672
-#    username: guest
-#    password: guest
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     gateway:
       default-filters:
@@ -87,9 +87,9 @@ spring:
 #            - AddResponseHeader=second-response, second-response-header2
             - CustomFilter
 
-token:
-  expiration_time: 86400000
-  secret: user_token
+#token:
+#  expiration_time: 86400000
+#  secret: user_token
 
 management:
   endpoints:
