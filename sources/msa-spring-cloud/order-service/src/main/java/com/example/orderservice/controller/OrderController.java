@@ -28,13 +28,14 @@ public class OrderController {
     Environment env;
     OrderService orderService;
     KafkaProducer kafkaProducer;
-    OrderProducer orderProducer;
+//    OrderProducer orderProducer;
 
     @Autowired
-    public OrderController(Environment env, OrderService orderService) {
+    public OrderController(Environment env, OrderService orderService,
+                           KafkaProducer kafkaProducer) {
         this.env = env;
         this.orderService = orderService;
-//        this.kafkaProducer = kafkaProducer;
+        this.kafkaProducer = kafkaProducer;
 //        this.orderProducer = orderProducer;
     }
 
@@ -62,7 +63,7 @@ public class OrderController {
         orderDto.setTotalPrice(orderDetails.getQty() * orderDetails.getUnitPrice());
 
         /* send this order to the kafka */
-//        kafkaProducer.send("example-catalog-topic", orderDto);
+        kafkaProducer.send("example-catalog-topic", orderDto);
 //        orderProducer.send("orders", orderDto);
 
 //        ResponseOrder responseOrder = mapper.map(orderDto, ResponseOrder.class);
