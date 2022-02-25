@@ -13,17 +13,17 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+//@Service
 @Slf4j
 public class KafkaConsumer {
     CatalogRepository repository;
 
-    @Autowired
+//    @Autowired
     public KafkaConsumer(CatalogRepository repository) {
         this.repository = repository;
     }
 
-    @KafkaListener(topics = "example-catalog-topic")
+//    @KafkaListener(topics = "example-catalog-topic")
     public void updateQty(String kafkaMessage) {
         log.info("Kafka Message: ->" + kafkaMessage);
 
