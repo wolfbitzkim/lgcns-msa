@@ -25,16 +25,16 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-//        http.authorizeRequests().antMatchers("/users/**").permitAll();
+        http.authorizeRequests().antMatchers("/users/**").permitAll();
 
-        http.authorizeRequests().antMatchers("/actuator/**").permitAll();
-        http.authorizeRequests().antMatchers("/health_check/**").permitAll();
-        http.authorizeRequests().antMatchers("/login/**").permitAll();
-        http.authorizeRequests().antMatchers("/**")
-//                .hasIpAddress(env.getProperty("gateway.ip")) // <- IP 변경
-                .access("hasIpAddress('192.168.0.38') or hasIpAddress('127.0.0.1/32')")
-                .and()
-                .addFilter(getAuthenticationFilter());
+//        http.authorizeRequests().antMatchers("/actuator/**").permitAll();
+//        http.authorizeRequests().antMatchers("/health_check/**").permitAll();
+//        http.authorizeRequests().antMatchers("/login/**").permitAll();
+//        http.authorizeRequests().antMatchers("/**")
+////                .hasIpAddress(env.getProperty("gateway.ip")) // <- IP 변경
+//                .access("hasIpAddress('192.168.0.38') or hasIpAddress('127.0.0.1/32')")
+//                .and()
+//                .addFilter(getAuthenticationFilter());
 
         http.headers().frameOptions().disable();
     }
