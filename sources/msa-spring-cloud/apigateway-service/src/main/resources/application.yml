@@ -28,7 +28,7 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/user-service/login
+            - Path=/user-service/login # spring security (login) -> 127.0.0.1:50001/login
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
@@ -36,7 +36,7 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/user-service/users  # localhost:50001/users
+            - Path=/user-service/users  # localhost:50001/users (회원가입)
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
@@ -65,7 +65,7 @@ spring:
         - id: order-service
           uri: lb://ORDER-SERVICE
           predicates:
-            - Path=/order-service/actuator/**
+            - Path=/actuator/**
             - Method=GET,POST
         - id: order-service
           uri: lb://ORDER-SERVICE

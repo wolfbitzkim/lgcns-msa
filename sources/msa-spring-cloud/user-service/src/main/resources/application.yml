@@ -54,3 +54,7 @@ greeting:
 
 order_service:
   url: http://order-service/order-service/%s/orders
+
+token:
+  expiration_time: 864000000
+  secret: user_token
