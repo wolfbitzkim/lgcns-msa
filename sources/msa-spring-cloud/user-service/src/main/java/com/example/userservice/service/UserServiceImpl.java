@@ -5,6 +5,7 @@ import com.example.userservice.dto.UserDto;
 import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.jpa.UserRepository;
 import com.example.userservice.vo.ResponseOrder;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -90,8 +91,8 @@ public class UserServiceImpl implements UserService {
 
         List<ResponseOrder> ordersList = new ArrayList<>();
         /* #1 Using as rest template */
-        /* http://ORDER-SERVICE/order-service/1234-45565-34343423432/orders */
-        /* http://127.0.0.1:9002/order-service/1234-45565-34343423432/orders */
+            // http://ORDER-SERVICE/order-service/1234-45565-34343423432/orders
+            // http://127.0.0.1:9002/order-service/1234-45565-34343423432/orders
 //        String orderUrl = String.format(env.getProperty("order_service.url"), userId);
 //        ResponseEntity<List<ResponseOrder>> orderListResponse =
 //                restTemplate.exchange(orderUrl, HttpMethod.GET, null,
@@ -99,8 +100,7 @@ public class UserServiceImpl implements UserService {
 //                });
 //        ordersList = orderListResponse.getBody();
 
-        /* Using a feign client */
-        /* #2 Feign exception handling */
+        /* #2 Feign exception handling (Using a feign client) */
 //        try {
 //            ordersList = orderServiceClient.getOrders(userId);
 //        } catch (FeignException ex) {

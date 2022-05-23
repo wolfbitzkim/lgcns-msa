@@ -10,13 +10,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Component
 public class FeignErrorDecoder implements ErrorDecoder {
-    Environment env;
-
-    @Autowired
-    public FeignErrorDecoder(Environment env) {
-        this.env = env;
-    }
-
     @Override
     public Exception decode(String methodKey, Response response) {
         switch(response.status()) {
