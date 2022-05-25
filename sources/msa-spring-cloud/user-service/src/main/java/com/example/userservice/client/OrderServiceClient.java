@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-//@FeignClient(name="order-service", configuration = FeignErrorDecoder.class)
-@FeignClient(name="order-service")
+@FeignClient(name="order-service", configuration = FeignErrorDecoder.class)
+//@FeignClient(name="order-service")
 public interface OrderServiceClient {
 
-//    @GetMapping("/order-service/{userId}/orders_wrong_url")
-    @GetMapping("/order-service/{userId}/orders")
+    @GetMapping("/order-service/{userId}/orders_wrong_url")
+//    @GetMapping("/order-service/{userId}/orders")
     List<ResponseOrder> getOrders(@PathVariable String userId);
 
 }

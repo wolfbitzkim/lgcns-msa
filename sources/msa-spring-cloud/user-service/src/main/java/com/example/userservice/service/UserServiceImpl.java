@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
 
         /* #2 Feign exception handling (Using a feign client) */
 //        try {
-//            ordersList = orderServiceClient.getOrders(userId);
+            ordersList = orderServiceClient.getOrders(userId);
 //        } catch (FeignException ex) {
 //            log.error(ex.getMessage());
 //        }
