@@ -11,11 +11,11 @@ eureka:
 spring:
   application:
     name: apigateway-service
-  rabbitmq:
-    host: 43.200.42.197
-    port: 5672
-    username: guest
-    password: guest
+#  rabbitmq:
+#    host: 127.0.0.1
+#    port: 5672
+#    username: guest
+#    password: guest
   cloud:
     gateway:
       default-filters:
@@ -25,7 +25,7 @@ spring:
             preLogger: true
             postLogger: true
       routes:
-        - id: user-service
+        - id: user-service1
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/login # spring security (login) -> 127.0.0.1:50001/login
@@ -33,7 +33,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*),/$\{segment}
-        - id: user-service
+        - id: user-service2
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/users  # localhost:50001/users (회원가입)
@@ -41,7 +41,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-        - id: user-service
+        - id: user-service3
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/actuator/**
@@ -49,7 +49,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
-        - id: user-service
+        - id: user-service4
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/**
@@ -72,8 +72,7 @@ spring:
           predicates:
             - Path=/order-service/**
         - id: first-service
-          # http://localhost:8081/first-service/message
-          # http://localhost:8000/first-service/message -> http://localhost:8081/first-service/message
+#          http://localhost:8000/first-service/welcome --> http://localhost:53571/first-service/welcome
           uri: lb://MY-FIRST-SERVICE
           predicates:
             - Path=/first-service/**
@@ -82,13 +81,14 @@ spring:
             - AddResponseHeader=first-response, first-response-header2
             - CustomFilter
         - id: second-service
+#          http://localhost:8000/second-service/welcome --> http://localhost:8082/second-service/welcome
           uri: lb://MY-SECOND-SERVICE
           predicates:
             - Path=/second-service/**
-          filters:
-            - AddRequestHeader=second-request, second-request-header2
-            - AddResponseHeader=second-response, second-response-header2
-            - CustomFilter
+#          filters:
+#            - AddRequestHeader=second-request, second-request-header2
+#            - AddResponseHeader=second-response, second-response-header2
+#            - CustomFilter
 
 #token:
 #  expiration_time: 864000000
