@@ -9,6 +9,6 @@
         "auto.evolve":"true",
         "delete.enabled":"false",
         "tasks.max":"1",
-        "topics":"my_topic_users"
+        "topics":"example-catalog-topic"
     }
 }
