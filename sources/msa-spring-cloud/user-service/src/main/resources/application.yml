@@ -32,8 +32,10 @@ spring:
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-  #    prefer-ip-address: true
-  #    ip-address: ${server.address}
+
+#    prefer-ip-address: true
+#    ip-address: ${server.address}
+
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
@@ -59,6 +61,6 @@ order_service:
 #order_service:
 #  url: http://127.0.0.1:8000/order-service/%s/orders
 
-#token:
-#  expiration_time: 864000000
-#  secret: user_token
+token:
+  expiration_time: 864000000
+  secret: user_token
